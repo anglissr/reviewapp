@@ -68,14 +68,19 @@
               >
             </li>
             <li class="nav-item">
-              <a 
-              class="nav-link active" 
-              aria-current="page" 
-              href="{% url 'campus' %}"
-              >Campus Map</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'campus' %}"
+                >Campus Map</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="{% url 'about' %}">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'contact' %}">Contact</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -88,7 +93,6 @@
         </div>
       </div>
     </nav>
-
 
     <br />
     <div class="container">{% block content %}{% endblock %}</div>

@@ -2,7 +2,8 @@
 from django.contrib import admin
 
 # Register models.
-from .models import Restaurant, Review, Tag
+from .models import Restaurant, Review, Tag, Contact_us
 admin.site.register(Restaurant)
 admin.site.register(Review)
 admin.site.register(Tag)
+admin.site.register(Contact_us)

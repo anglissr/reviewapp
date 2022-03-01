@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # Register your models here.
-from .models import Restaurant, Review 
+from .models import Contact_us, Restaurant, Review 
 from django.views import generic
 from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404
@@ -60,6 +60,20 @@ def Cafes(request):
 
 def Campus(request):
     return render(request,'reviews/campus.html')     
+
+def Contact(request):
+    if request.method == "POST":
+        Contact = Contact_us()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        Contact.name = name
+        Contact.email = email
+        Contact.message = message
+        Contact.save()
+        
+    return render(request, 'reviews/contact.html')
     
 # The list of restaurants (restaurant_list.html)
 class RestaurantListView(generic.ListView):

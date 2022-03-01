@@ -28,11 +28,13 @@
   </head>
 
   <body
-    style="background: url('https://i.imgur.com/t0ZoKLD.png'); 
-    height: 100vh; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;"
+    style="
+      background: url('https://i.imgur.com/t0ZoKLD.png');
+      height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    "
   >
     <!-- Navbar -->
     <nav
@@ -74,14 +76,20 @@
               >
             </li>
             <li class="nav-item">
-              <a 
-              class="nav-link active" 
-              aria-current="page" 
-              href="{% url 'campus' %}"
-              >Campus Map</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'campus' %}"
+                >Campus Map</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'contact' %}"
+                >Contact Us</a
+              >
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -95,12 +103,13 @@
       </div>
     </nav>
 
-    <div class="container" style="padding-top: 20px;">
+    <div class="container" style="padding-top: 20px">
       <form action="{% url 'restaurant-search' %}" method="get">
         <input
-        name="q" type="text"
-        class="form-control"
-        placeholder="Search for restaurants..."
+          name="q"
+          type="text"
+          class="form-control"
+          placeholder="Search for restaurants..."
         />
       </form>
     </div>

@@ -1,0 +1,68 @@
+{% extends "base_nosearch.html" %} {% block content %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+  </head>
+  <body>
+    <br />
+
+    <div class="container">
+      <div style="text-align: center">
+        <h2>Contact Us</h2>
+        <p>
+          Please leave us a review if you have any improvements you would like
+          to see:
+        </p>
+      </div>
+      <br />
+
+      <form method="POST">
+        {% csrf_token %}
+        <br />
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Name</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Your name..."
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="exampleFormControlInput1">E-mail</label>
+          <input
+            name="email"
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Your email address..."
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Message</label>
+          <textarea
+            name="message"
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="What's on your mind..."
+          ></textarea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-secondary">Submit</button>
+      </form>
+    </div>
+    <br />
+  </body>
+  <footer><p id="copyright">Copyright &copy; 2022 by CWU Students.</p></footer>
+</html>
+{% endblock %}

@@ -73,3 +73,10 @@ class Review(models.Model):
     def get_url(self):
         return self.resturaunt.get_absolute_url()
         
+class Contact_us(models.Model):
+    name = models.CharField(max_length=158)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

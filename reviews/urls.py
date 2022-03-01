@@ -16,7 +16,7 @@ urlpatterns = [
     path('about',views.About, name ='about'),
     path('cafes', views.Cafes, name='cafes'),
     path('campus', views.Campus, name='campus'),
-
+    path('contact/', views.Contact, name='contact'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
