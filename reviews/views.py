@@ -5,7 +5,7 @@ from .models import Contact_us, Restaurant, Review
 from django.views import generic
 from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404
-from reviews.forms import ReviewForm, SignUpForm
+from reviews.forms import ReviewForm, SignUpForm, showForm
 from django.db.models import Q # new
 #For defining views requiring the user to be logged in. use @login_required above def to do so
 from django.contrib.auth.decorators import login_required 
@@ -122,7 +122,7 @@ def RestaurantDetails(request, restaurant_id):
     reviews = Review.objects.filter(resturaunt=restaurantObj)
 
     # If the form was submitted
-    if request.method == 'POST':
+    if request.method == 'POST' and 'submit1' in request.POST:
 
         # Create a form instance and populate it with data from the request (binding):
         form = ReviewForm(request.POST)
@@ -146,15 +146,24 @@ def RestaurantDetails(request, restaurant_id):
 
             # redirect to a new URL:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+    if request.method == 'POST' and 'btnform2' in request.POST:
+        form2 = showForm(request.POST)
+        if form2.is_valid():
+            display = form2.cleaned_data['display']
+            if display == 1:
+                reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('rating')
+            else:
+                reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('-rating')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         form = ReviewForm()
-
+        form2 = showForm()
        
     context = {
         'form': form,
         'restaurant': restaurantObj,
-        'reviews': reviews, 
+        'reviews': reviews,
+        'form2': form2 
     }
 
     return render(request, 'reviews/restaurant_details.html', context=context)

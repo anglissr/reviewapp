@@ -49,7 +49,17 @@ class Restaurant(models.Model):
             return 0
 
 
+def asecening(self): 
+    orderhigh = Review.objects.filter(resturant=self.id) 
+    return orderhigh.sort() 
+def descenidng(self): 
+    orderlow = Review.objects.filter(resturant=self.id) 
+    return orderlow.sort(reverse = True)
 
+DISPLAYING =[ 
+    (1, 'Ascending'), 
+    (2, 'Dscending'),
+]
 RATINGS = [
     (1, '1 Star'),
     (2, '2 Stars'),
@@ -72,7 +82,7 @@ class Review(models.Model):
 
     def get_url(self):
         return self.resturaunt.get_absolute_url()
-        
+
 class Contact_us(models.Model):
     name = models.CharField(max_length=158)
     email = models.EmailField()

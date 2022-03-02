@@ -1,6 +1,6 @@
 # Defining forms that users can input data into in html files
 from django import forms
-from reviews.models import Review, RATINGS
+from reviews.models import DISPLAYING, Review, RATINGS
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -24,3 +24,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+class showForm(forms.ModelForm):
+    display = forms.ChoiceField(choices=DISPLAYING, required=True)
+    class Meta:
+        model = Review
+        fields = ('display',)
