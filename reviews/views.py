@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+import sys
+
 
 
 def Account(request):
@@ -119,10 +121,10 @@ def RestaurantSearch(request):
 # The details of a single restaurant (restaurant_details.html)
 def RestaurantDetails(request, restaurant_id):
     restaurantObj = get_object_or_404(Restaurant, pk=restaurant_id)
-    reviews = Review.objects.filter(resturaunt=restaurantObj)
-
+    reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('rating')
     # If the form was submitted
     if request.method == 'POST' and 'submit1' in request.POST:
+        print(request.POST, file=sys.stderr)
 
         # Create a form instance and populate it with data from the request (binding):
         form = ReviewForm(request.POST)
@@ -146,15 +148,37 @@ def RestaurantDetails(request, restaurant_id):
 
             # redirect to a new URL:
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
     if request.method == 'POST' and 'btnform2' in request.POST:
+        print(request.POST, file=sys.stderr)
         form2 = showForm(request.POST)
+        form = ReviewForm()
         if form2.is_valid():
             display = form2.cleaned_data['display']
-            if display == 1:
+            print(display, file=sys.stderr)
+            if display == '1':
+                print("here", file=sys.stderr)
                 reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('rating')
+                context = {
+                    'form': form,
+                    'restaurant': restaurantObj,
+                    'reviews': reviews,
+                    'form2': form2 
+                }
+
+                return render(request, 'reviews/restaurant_details.html', context=context)                
             else:
                 reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('-rating')
+                context = {
+                    'form': form,
+                    'restaurant': restaurantObj,
+                    'reviews': reviews,
+                    'form2': form2 
+                }
+
+                return render(request, 'reviews/restaurant_details.html', context=context)    
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
     else:
         form = ReviewForm()
         form2 = showForm()

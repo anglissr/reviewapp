@@ -58,7 +58,7 @@ def descenidng(self):
 
 DISPLAYING =[ 
     (1, 'Ascending'), 
-    (2, 'Dscending'),
+    (2, 'Descending'),
 ]
 RATINGS = [
     (1, '1 Star'),

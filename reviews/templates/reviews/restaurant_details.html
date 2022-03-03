@@ -2,6 +2,7 @@
 
 {% block content %}
 		<h2>{{ restaurant.name }}</h2>
+    <h2>{{ display }}</h2>
     
     {% if restaurant.get_reviews == 0 %}
       <p style="color: gray;"> No user reviews yet...</p>
@@ -29,7 +30,7 @@
       <label>Logged in as: </label>
       <a href="{% url 'account' %}">{{ user.get_username }}</a>
       {% else %}
-      <label style="font-weight: bold;">You will be posting this review anonymously. </label>    
+      <label style="font-weight: bold;">You will be posting this review anonymously.  </label> <br>   
       <a href="{% url 'signup' %}">Click here to create an account</a>
       <label>or </label>
       <a href="{% url 'login'%}?next={{request.path}}">click here to login!</a>      
@@ -42,12 +43,14 @@
 
       <button type="submit" class="btn btn-success" name = "submit1">Submit</button>
     </form>
+    <br>
     <form method='POST'>
       {% csrf_token %}
-    {{ form2.display }}
-   
-    <button type="submit" name="btnform2">Show</button>
+      {{ form2.display }}
+      <button type="submit" class="btn btn-secondary" name="btnform2">Show</button>
     </form>
+
+
     {% if reviews %}
       {% for review in reviews %}
       <div style="padding-top: 25px;">
