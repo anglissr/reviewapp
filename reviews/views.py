@@ -121,7 +121,7 @@ def RestaurantSearch(request):
 # The details of a single restaurant (restaurant_details.html)
 def RestaurantDetails(request, restaurant_id):
     restaurantObj = get_object_or_404(Restaurant, pk=restaurant_id)
-    reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('rating')
+    reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('-date')
     # If the form was submitted
     if request.method == 'POST' and 'submit1' in request.POST:
         print(request.POST, file=sys.stderr)
