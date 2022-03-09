@@ -167,7 +167,7 @@ def RestaurantDetails(request, restaurant_id):
                 }
 
                 return render(request, 'reviews/restaurant_details.html', context=context)                
-            else:
+            elif display == '2':
                 reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('-rating')
                 context = {
                     'form': form,
@@ -175,7 +175,25 @@ def RestaurantDetails(request, restaurant_id):
                     'reviews': reviews,
                     'form2': form2 
                 }
-
+                return render(request, 'reviews/restaurant_details.html', context=context)
+            elif display == '3':
+                reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('date')
+                context = {
+                    'form': form,
+                    'restaurant': restaurantObj,
+                    'reviews': reviews,
+                    'form2': form2 
+                }
+                return render(request, 'reviews/restaurant_details.html', context=context)
+            else:
+                reviews = Review.objects.filter(resturaunt=restaurantObj).order_by('-date')
+                context = {
+                    'form': form,
+                    'restaurant': restaurantObj,
+                    'reviews': reviews,
+                    'form2': form2 
+                }
+                
                 return render(request, 'reviews/restaurant_details.html', context=context)    
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     

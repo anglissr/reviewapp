@@ -57,8 +57,10 @@ def descenidng(self):
     return orderlow.sort(reverse = True)
 
 DISPLAYING =[ 
-    (1, 'Ascending'), 
-    (2, 'Descending'),
+    (1, 'Lowest Rated'), 
+    (2, 'Highest Rated'),
+    (3, 'Oldest First'),
+    (4, 'Newest First')
 ]
 RATINGS = [
     (1, '1 Star'),
