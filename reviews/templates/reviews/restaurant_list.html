@@ -32,8 +32,12 @@
                 {% if restaurant.get_reviews > 4 %}
                   <p class="card-text" style="color: gray; margin: 0px;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
                 {% endif %}
-                <p style="" class="card-text" ><span class="badge bg-secondary">Tag 1</span> <span class="badge bg-secondary">Tag 2</span></p>
-                <p style="margin: 0px;" class="card-text" ><small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
+                <p style="" class="card-text" > 
+                  {% for Tag in restaurant.get_tags %}
+                  <span class="badge bg-secondary">{{Tag.name}}</span> 
+                  {% endfor %}
+                </p>
+                <p style="margin: 0px;" class="card-text" > <small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
                 <p class="card-text">{{restaurant.description}}</p>
               </div>
             </div>
@@ -75,7 +79,11 @@
                 {% if restaurant.get_reviews > 4 %}
                   <p class="card-text" style="color: gray; margin: 0px;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
                 {% endif %}
-                <p style="" class="card-text" ><span class="badge bg-secondary">Tag 1</span> <span class="badge bg-secondary">Tag 2</span></p>
+                <p style="" class="card-text" > 
+                  {% for Tag in restaurant.get_tags %}
+                  <span class="badge bg-secondary">{{Tag.name}}</span> 
+                  {% endfor %}
+                </p>
                 <p style="margin: 0px;" class="card-text" ><small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
                 <p class="card-text">{{restaurant.description}}</p>
               </div>
@@ -118,7 +126,11 @@
                 {% if restaurant.get_reviews > 4 %}
                   <p class="card-text" style="color: gray; margin: 0px;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
                 {% endif %}
-                <p style="" class="card-text" ><span class="badge bg-secondary">Tag 1</span> <span class="badge bg-secondary">Tag 2</span></p>
+                <p style="" class="card-text" > 
+                  {% for Tag in restaurant.get_tags %}
+                  <span class="badge bg-secondary">{{Tag.name}}</span> 
+                  {% endfor %}
+                </p>
                 <p style="margin: 0px;" class="card-text" ><small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
                 <p class="card-text">{{restaurant.description}}</p>
               </div>

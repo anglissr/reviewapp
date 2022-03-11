@@ -47,6 +47,10 @@ class Restaurant(models.Model):
             return round(total/len(reviews),2)
         else:
             return 0
+    
+    def get_tags(self):
+        tags = self.tag.all()
+        return tags
 
 
 def asecening(self): 

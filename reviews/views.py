@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # Register your models here.
-from .models import Contact_us, Restaurant, Review 
+from .models import Contact_us, Restaurant, Review, Tag
 from django.views import generic
 from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404
@@ -89,8 +89,9 @@ def RestaurantList(request):
     restaurantsRestaurant = Restaurant.objects.filter(style='Restaurant')
     restaurantsCafe = Restaurant.objects.filter(style='Café')
     restaurantsMarket = Restaurant.objects.filter(style='Market')
-    
-
+    #print(Restaurant.objects.get(name='El Gato and Quesadillas').get_tags())
+    #print(Restaurant.objects.filter(tag=(Tag.objects.filter(name="Tacos"))))
+    print(Restaurant.objects.get(name='El Gato and Quesadillas').get_tags())
     context = {
         'restaurants': restaurants,
         'restaurantsRestaurant': restaurantsRestaurant,
@@ -109,9 +110,10 @@ def RestaurantSearch(request):
         if query_name:
             if query_name.lower() == "cafe":
                 query_name = "Café"
-            results = Restaurant.objects.filter(
-            Q(name__icontains=query_name) | Q(style__icontains=query_name)
-            )
+            if Tag.objects.filter(name__icontains=query_name).exists():
+                results = Restaurant.objects.filter(Q(name__icontains=query_name) | Q(tag=(Tag.objects.get(name__icontains=query_name).id)))
+            else:
+                results = Restaurant.objects.filter(Q(name__icontains=query_name))
             return render(request, 'reviews/restaurant_search.html', {"results":results, "query":query_name})
         else:
             results = Restaurant.objects.all()
