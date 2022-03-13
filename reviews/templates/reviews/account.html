@@ -5,11 +5,11 @@
 <!--Displays a simple page with a link to go to the login page if not logged in and logout page if logged in-->
 <ul class="sidebar-nav">
    {% if user.is_authenticated %}
-     <h4>Welcome, {{ user.get_username }}!</h4>
+     <h4>Welcome, {{ user.first_name }}!</h4>
      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
      <br>
      <!--Displays all reviews that the user has submitted-->
-     <h5>Your reviews: <h5>
+     <h5>Your reviews: </h5>
       
      {% if reviews %}
       {% for review in reviews %}
