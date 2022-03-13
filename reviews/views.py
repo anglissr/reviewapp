@@ -87,13 +87,12 @@ def password_reset_request(request):
 			if associated_users.exists():
 				for user in associated_users:
 					subject = "Password Reset Requested"
-					email_template_name = "main/password/password_reset_email.txt"
+					email_template_name = "reviews/registration/password_reset_email.txt"
 					c = {
 					"email":user.email,
 					'domain':'127.0.0.1:8000',
 					'site_name': 'Website',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-					"user": user,
 					'token': default_token_generator.make_token(user),
 					'protocol': 'http',
 					}
@@ -101,9 +100,13 @@ def password_reset_request(request):
 					try:
 						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
 					except BadHeaderError:
+
 						return HttpResponse('Invalid header found.')
-					return redirect ("/password_reset/done/")
+						
+					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
+					return redirect ("main:homepage")
 	password_reset_form = PasswordResetForm()
+    # TemplateDoesNotExist error (idk why, the html file is in the template folder)
 	return render(request=request, template_name="reviews/registration/password_reset.html", context={"password_reset_form":password_reset_form})
 
 def Home(request):
