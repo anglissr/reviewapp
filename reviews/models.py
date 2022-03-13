@@ -60,7 +60,7 @@ DISPLAYING =[
     (1, 'Lowest Rated'), 
     (2, 'Highest Rated'),
     (3, 'Oldest First'),
-    (4, 'Newest First')
+    (4, 'Newest First'),
 ]
 RATINGS = [
     (1, '1 Star'),

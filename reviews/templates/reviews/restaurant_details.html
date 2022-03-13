@@ -48,11 +48,11 @@
       {% csrf_token %}
       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-    <button type="submit" class="btn btn-success "style="background-color: #ffcc00;"  name="btnform2">Sort by</button>
+    <button type="submit" class="btn btn-success "style="background-color: #ffcc00; color:red;"  name="btnform2">Sort by</button>
     {{ form2.display }}
     </form>
     
-    {% if reviews %}
+    {% if reviews %} 
       {% for review in reviews %}
       <div style="padding-top: 25px;">
           <div class="card" style="width: 600px;">
