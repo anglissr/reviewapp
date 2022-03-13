@@ -31,13 +31,14 @@
         <a href="{% url 'restaurants'%}">start writing some right now!</a>
       </p>
     {% endif %}
+    <p>Want to change your password?
+      <a href="{% url 'change_password'%}">Click here.</a>
+    </p>
    {% else %}
      <a href="{% url 'login'%}?next={{request.path}}">Login here</a>
      <label> to keep track of all the reviews you submit!</label>
    {% endif %}
   </ul>
-  <p>Want to change your password?
-    <a href="{% url 'change_password'%}">Click here.</a>
-  </p>
+
   <footer> <p id="copyright">Copyright &copy; 2022 by CWU Students.</p> </footer>
 {% endblock %}
