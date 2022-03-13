@@ -47,10 +47,6 @@ class Restaurant(models.Model):
             return round(total/len(reviews),2)
         else:
             return 0
-    
-    def get_tags(self):
-        tags = self.tag.all()
-        return tags
 
 
 def asecening(self): 
@@ -64,7 +60,7 @@ DISPLAYING =[
     (1, 'Lowest Rated'), 
     (2, 'Highest Rated'),
     (3, 'Oldest First'),
-    (4, 'Newest First')
+    (4, 'Newest First'),
 ]
 RATINGS = [
     (1, '1 Star'),

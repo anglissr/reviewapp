@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # Register your models here.
-from .models import Contact_us, Restaurant, Review, Tag
+from .models import Contact_us, Restaurant, Review 
 from django.views import generic
 from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404
@@ -10,20 +10,9 @@ from django.db.models import Q # new
 #For defining views requiring the user to be logged in. use @login_required above def to do so
 from django.contrib.auth.decorators import login_required 
 # For signup
-from django.contrib import messages
-from django.contrib.auth import login, authenticate, update_session_auth_hash
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, PasswordResetForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-# For Pass reset
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from django.db.models.query_utils import Q
-from django.utils.http import urlsafe_base64_encode
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-from django.contrib.auth.models import User
 import sys
 
 
@@ -61,53 +50,6 @@ def Signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-# Lets user change pass
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            #messages.success(request, 'Your password was successfully updated!')
-            return redirect('account')
-        #else:
-            #messages.error(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {
-        'form': form
-    })
-
-def password_reset_request(request):
-	if request.method == "POST":
-		password_reset_form = PasswordResetForm(request.POST)
-		if password_reset_form.is_valid():
-			data = password_reset_form.cleaned_data['email']
-			associated_users = User.objects.filter(Q(email=data))
-			if associated_users.exists():
-				for user in associated_users:
-					subject = "Password Reset Requested"
-					email_template_name = "reviews/registration/password_reset_email.txt"
-					c = {
-					"email":user.email,
-					'domain':'127.0.0.1:8000',
-					'site_name': 'Website',
-					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
-					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
-					}
-					email = render_to_string(email_template_name, c)
-					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
-					except BadHeaderError:
-
-						return HttpResponse('Invalid header found.')
-						
-					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
-					return redirect ("main:homepage")
-	password_reset_form = PasswordResetForm()
-    # TemplateDoesNotExist error (idk why, the html file is in the template folder)
-	return render(request=request, template_name="reviews/registration/password_reset.html", context={"password_reset_form":password_reset_form})
 
 def Home(request):
     return render(request, 'reviews/home.html')
@@ -147,9 +89,8 @@ def RestaurantList(request):
     restaurantsRestaurant = Restaurant.objects.filter(style='Restaurant')
     restaurantsCafe = Restaurant.objects.filter(style='Café')
     restaurantsMarket = Restaurant.objects.filter(style='Market')
-    #print(Restaurant.objects.get(name='El Gato and Quesadillas').get_tags())
-    #print(Restaurant.objects.filter(tag=(Tag.objects.filter(name="Tacos"))))
-    print(Restaurant.objects.get(name='El Gato and Quesadillas').get_tags())
+    
+
     context = {
         'restaurants': restaurants,
         'restaurantsRestaurant': restaurantsRestaurant,
@@ -168,10 +109,9 @@ def RestaurantSearch(request):
         if query_name:
             if query_name.lower() == "cafe":
                 query_name = "Café"
-            if Tag.objects.filter(name__icontains=query_name).exists():
-                results = Restaurant.objects.filter(Q(name__icontains=query_name) | Q(tag=(Tag.objects.get(name__icontains=query_name).id)))
-            else:
-                results = Restaurant.objects.filter(Q(name__icontains=query_name))
+            results = Restaurant.objects.filter(
+            Q(name__icontains=query_name) | Q(style__icontains=query_name)
+            )
             return render(request, 'reviews/restaurant_search.html', {"results":results, "query":query_name})
         else:
             results = Restaurant.objects.all()
@@ -194,9 +134,9 @@ def RestaurantDetails(request, restaurant_id):
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             review = form.save(commit=False)
 
-            #Set username as default anonymous else use their First name + Last initial
+            #Set username as default anonymous else use their username
             if request.user.is_authenticated:
-                review.username = request.user.first_name + " " + request.user.last_name[0] + "."
+                review.username = request.user.username
                 review.user = request.user
             else:
                 review.username = 'Anonymous'
