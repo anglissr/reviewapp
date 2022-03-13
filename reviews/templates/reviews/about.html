@@ -8,34 +8,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body
   style="
-    
+    background: url('https://previews.123rf.com/images/faizalramli/faizalramli1906/faizalramli190600048/124375871-top-view-of-notebook-pen-plant-coffee-and-glasses-on-grey-grunge-floor-written-with-about-us-.jpg?fj=1');
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
   "
-  
 >
 <style>
   #idLinkedInIcon{background-color:rgb(0, 102, 170);border-radius:6px;color:white;cursor:pointer;display:inline-block;font:bold 25px Arial, Helvetica, sans-serif;height:35px;margin-top:1px;text-align:center;width:35px;}
 #idLinkedInIcon:hover{background-color:#06d;}
 </style>
-    <h1>About</h1>
-    <br />
+
+    <h1>
+      <p style="font-family:Courier; color:rgb(16, 14, 20)">
+        About</h1>
+    
     <p>
+      <p>
+        <p style="font-family:Courier; color:wHITE; font-size: 20px;">
       This website allows students at CWU to rate and review the various dining
       options on the CWU Ellensburg campus. It was designed as a group project
       for CS380 Introduction to Software Engineering. This site was created by:
     </p>
+    </p>
     <br />
     <div class="row">
 
-  
+    <div class = "card-group">
     <div class="card">
       
       <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width: 100%" />
@@ -62,8 +66,10 @@
         <p><div id="idLinkedInIcon" onclick="window.open('https://www.linkedin.com/in/ibrahim-sydock-7b4840224/');" title="Ibrahim">in</div></p>
      </div>
     </div>
+  </div>
     <br />
     &nbsp;&nbsp;&nbsp;
+    <div class ="card-group">
     <div class="card">
       
       <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width: 100%" />
@@ -88,8 +94,10 @@
         <p><div id="idLinkedInIcon" onclick="window.open('https://www.linkedin.com/in/ryanangliss/');" title="Ryan A">in</div></p>
       </div>
     </div>
+  </div>
     <br />
     &nbsp;&nbsp;&nbsp;
+    <div class="card-group">
     <div class="card">
       
       <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width: 100%" />
@@ -116,6 +124,7 @@
 
     </div>
     </div>
+    </div>
 
   </div>
 
@@ -126,6 +135,7 @@
  
     <br />
   </body>
-  <footer> <p id="copyright">Copyright &copy; 2022 by CWU Students.</p> </footer>
+
+  <footer> <p style="font-family:Courier; color:wHITE; font-size: 20px;" id="copyright">Copyright &copy; 2022 by CWU Students.</p> </footer>
 </html>
 {% endblock %}
