@@ -67,7 +67,7 @@ a:active {
 }
 
 /* contact cards for about page  */
-.card {
+.card2 {
   /* Add shadows to create the "card" effect */
   background-color: transparent;
   width: 25%;
@@ -79,7 +79,7 @@ a:active {
 }
 
 /* On mouse-over, add a deeper shadow */
-.card:hover {
+.card2:hover {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
