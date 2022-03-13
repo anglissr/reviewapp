@@ -47,10 +47,9 @@
   
     <form method='post'>
       {% csrf_token %}
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      {{ form2.display }}
+      <button type="submit" class="btn btn-success" name ="btnform2">Sort</button>
 
-    <button type="submit" class="btn btn-success "style="background-color: #ffcc00;"  name="btnform2">Sort by</button>
-    {{ form2.display }}
     </form>
     
     {% if reviews %}

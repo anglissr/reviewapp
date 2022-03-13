@@ -10,8 +10,9 @@ from django.db.models import Q # new
 #For defining views requiring the user to be logged in. use @login_required above def to do so
 from django.contrib.auth.decorators import login_required 
 # For signup
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
 import sys
 
@@ -50,6 +51,22 @@ def Signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+# Lets user change pass
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('account')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
 
 def Home(request):
     return render(request, 'reviews/home.html')
@@ -136,9 +153,9 @@ def RestaurantDetails(request, restaurant_id):
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             review = form.save(commit=False)
 
-            #Set username as default anonymous else use their username
+            #Set username as default anonymous else use their First name + Last initial
             if request.user.is_authenticated:
-                review.username = request.user.username
+                review.username = request.user.first_name + " " + request.user.last_name[0] + "."
                 review.user = request.user
             else:
                 review.username = 'Anonymous'

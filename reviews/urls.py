@@ -26,4 +26,5 @@ urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     # Account creation url
     re_path(r'^signup/$', core_views.Signup, name='signup'),
+    re_path(r'^password/$', views.change_password, name='change_password'),
 ]
