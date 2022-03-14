@@ -9,13 +9,33 @@
       <div class="card mb-3" style="max-width: 1000px;">
         <div class="row no-gutters">
           <div class="col-md-3">
-            <img src={{ restaurant.get_image }} class="card-img" style="margin-left: auto; max-width: 180px; padding: 10px">
+            <img src={{ restaurant.get_image }} class="card-img" style="margin-left: auto; max-width: 300px; padding: 10px;">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{ restaurant.name }}</h5>
-              <p class="card-text">Rating: {{ restaurant.get_reviews }}</p>
-              <p class="card-text"><small>{{restaurant.description}}</small></p>
+              <h5 class="card-title ">{{ restaurant.name }}</h5>
+              {% if restaurant.get_reviews == 0 %}
+              <p class="card-text" style="color: gray; margin: 0px;"> No user reviews yet...</p>
+              {% endif %}
+
+              {% if restaurant.get_reviews < 2 and restaurant.get_reviews > 0%}
+                <p class="card-text"style="color: gray; margin: 0px;"> Average user rating: <span style="color: #ff6666">{{ restaurant.get_reviews }} </span></p>
+              {% endif %}
+              
+              {% if restaurant.get_reviews > 2 and restaurant.get_reviews < 4 %}
+                <p class="card-text" style="color: gray; margin: 0px;"> Average user rating: <span style="color: #ffcc00">{{ restaurant.get_reviews }} </span></p>
+              {% endif %}
+              
+              {% if restaurant.get_reviews > 4 %}
+                <p class="card-text" style="color: gray; margin: 0px;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
+              {% endif %}
+              <p style="" class="card-text" > 
+                {% for Tag in restaurant.get_tags %}
+                <span class="badge bg-secondary">{{Tag.name}}</span> 
+                {% endfor %}
+              </p>
+              <p style="margin: 0px;" class="card-text" ><small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
+              <p class="card-text">{{restaurant.description}}</p>
             </div>
           </div>
         </div>

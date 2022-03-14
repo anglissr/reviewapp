@@ -5,6 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from reviews import views as core_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.Home, name='home'),
@@ -26,4 +27,9 @@ urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     # Account creation url
     re_path(r'^signup/$', core_views.Signup, name='signup'),
+    re_path(r'^password/$', views.change_password, name='change_password'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/password/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="main/password/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='main/password/password_reset_complete.html'), name='password_reset_complete'), 
+    path("password_reset", views.password_reset_request, name="password_reset"),  
 ]

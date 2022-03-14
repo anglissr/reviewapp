@@ -4,21 +4,24 @@
 		<h2>{{ restaurant.name }}</h2>
     
     {% if restaurant.get_reviews == 0 %}
-      <p style="color: gray;"> No user reviews yet...</p>
+      <p style="margin: 0px; color: gray;"> No user reviews yet...</p>
     {% endif %}
 
     {% if restaurant.get_reviews < 2 and restaurant.get_reviews > 0%}
-      <p style="color: gray;"> Average user rating: <span style="color: #ff6666">{{ restaurant.get_reviews }} </span></p>
+      <p style="margin: 0px; color: gray;"> Average user rating: <span style="color: #ff6666">{{ restaurant.get_reviews }} </span></p>
     {% endif %}
     
     {% if restaurant.get_reviews > 2 and restaurant.get_reviews < 4 %}
-      <p style="color: gray;"> Average user rating: <span style="color: #ffcc00">{{ restaurant.get_reviews }} </span></p>
+      <p style="margin: 0px; color: gray;"> Average user rating: <span style="color: #ffcc00">{{ restaurant.get_reviews }} </span></p>
     {% endif %}
     
     {% if restaurant.get_reviews > 4 %}
-      <p style="color: gray;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
+      <p style="margin: 0px; color: gray;"> Average user rating: <span style="color: #00cc66">{{ restaurant.get_reviews }} </span></p>
     {% endif %}
-    
+    {% for Tag in restaurant.get_tags %}
+      <span class="badge bg-secondary">{{Tag.name}}</span> 
+    {% endfor %}
+    <p style="margin-top: 10px; margin-bottom: 0px"  ><small><span class="text-success"><strong>Currently Open</strong></span> <span class="text-secondary"> - 7am - 5pm</span></small></p>
     <p>{{restaurant.description}}</p>
      
     <form method="post">
@@ -46,13 +49,12 @@
   
     <form method='post'>
       {% csrf_token %}
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      {{ form2.display }}
+      <button type="submit" class="btn btn-success" name ="btnform2">Sort</button>
 
-    <button type="submit" class="btn btn-success "style="background-color: #ffcc00; color:red;"  name="btnform2">Sort by</button>
-    {{ form2.display }}
     </form>
     
-    {% if reviews %} 
+    {% if reviews %}
       {% for review in reviews %}
       <div style="padding-top: 25px;">
           <div class="card" style="width: 600px;">
