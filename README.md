@@ -14,7 +14,7 @@ To get started with the CWU Dining Review App, follow these steps:
 
 1. Clone the repository
 
-    `git clone https://github.com/your-username/cwu-dining-review-app.git`
+    `git clone https://github.com/anglissr/reviewapp.git`
 
 2. Install the required packages
 
