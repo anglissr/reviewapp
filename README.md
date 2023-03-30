@@ -43,10 +43,10 @@ The CWU Dining Review App allows users to read and write reviews of all on-campu
 Here are some example screenshots from the CWU Dining Review App:
 
 Home Page
-![Screenshot 1](screenshots/main.png)
+![Screenshot 1](/screenshots/main.png?raw=true)
 
 Restaurant List
-![Screenshot 2](screenshots/list.png)
+![Screenshot 2](/screenshots/list.png?raw=true)
 
 Review Posting
-![Screenshot 2](screenshots/review.png)
+![Screenshot 2](/screenshots/review.png?raw=true)
